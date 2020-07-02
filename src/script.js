@@ -1,11 +1,11 @@
 const client = new Discord.Client();
 
-client.replyData = {
+client.replyList = {
     data: [],
 
     add: replyContainer => {
         const children = replyContainer.children;
-        client.replyData.data.push({
+        client.replyList.data.push({
             query: children[0],
             content: children[2]
         });
@@ -13,14 +13,16 @@ client.replyData = {
 
     search: text => {
         const res = [];
-        for (let reply of client.replyData.data) {
+        for (let reply of client.replyList.data) {
             const query = reply.query.value;
             const content = reply.content.value;
             if (text === query) res.push(content);
         }
         return res;
     }
-};
+}
+
+client.blacklist = [];
 
 client.on('ready', () => {
     console.log(`Ready! Logged in as ${client.user.tag}!`);
@@ -30,9 +32,11 @@ client.on('message', message => {
     if (message.system) return;
     if (message.author.bot) return;
 
-    if (message.content.startsWith(document.getElementById('prefixInput').value)) {
-        console.log(message.author.tag, ': ', message.content);
-    }
+    if (!message.content.startsWith(document.getElementById('prefixInput').value)) return;
+
+    if (client.blacklist.includes(message.author.id)) message.reply(`You're banned from using this bot!`);
+
+    console.log(message.author.tag, ': ', message.content);
 
     const replySearchRes = client.replyData.search(message.content)
     if (replySearchRes.length) {

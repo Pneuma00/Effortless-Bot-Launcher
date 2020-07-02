@@ -1,20 +1,37 @@
 <!DOCTYPE HTML>
 <html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
   <body>
-    <h1>Effortless Bot Launcher</h1>
-    누구나 쉽고 빠르게 디스코드 봇을 제작하고 관리할 수 있는 도구<br>
+    <header>
+      <h1>Effortless Bot Launcher</h1>
+      누구나 쉽고 빠르게 디스코드 봇을 제작하고 관리할 수 있는 도구<br>
+    </header>
 
-    <input id="tokenInput" type="password" placeholder="Enter the token...">
-    <button id="loginButton">Login</button><br>
-
-    <input id="prefixInput" type="text" placeholder="Prefix">
     <hr>
 
-    <div id="replyListContainer"></div>
-
-    <button id="replyAddButton">➕</button>
+    <div class="tab_wrap">
+      <div class="tab_menu_container">
+        <button class="tab_menu_btn on" type="button">General</button>
+        <button class="tab_menu_btn" type="button">Reply</button>
+        <button class="tab_menu_btn" type="button">Blacklist</button>
+      </div>
+      <div class="tab_box_container">
+        <div class="tab_box">
+          <input id="tokenInput" type="password" placeholder="Enter the token...">
+          <button id="loginButton">Login</button><br>
+          <input id="prefixInput" type="text" placeholder="Prefix">
+        </div>
+        <div class="tab_box">
+          <div id="replyListContainer"></div>
+          <button id="replyAddButton">➕</button>
+        </div>
+      </div>
+    </div>
 
     <script src="https://rawcdn.githack.com/discordjs/discord.js/6edddeaba17135b54e2f1c5bc35a29d802967a9e/discord.v12.min.js"></script>
+    <script src="src/tab.js"></script>
     <script src="src/script.js"></script>
   </body>
 </html>
