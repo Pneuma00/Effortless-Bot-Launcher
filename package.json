@@ -1,0 +1,19 @@
+{
+  "name": "effortless-bot-launcher",
+  "version": "1.0.0",
+  "description": "A simple discord-bot developing and running tool for beginners.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pneuma714/Effortless-Bot-Launcher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pneuma714/Effortless-Bot-Launcher/issues"
+  },
+  "homepage": "https://github.com/Pneuma714/Effortless-Bot-Launcher#readme"
+}
