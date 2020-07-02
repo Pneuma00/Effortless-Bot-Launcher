@@ -1,2 +1,6 @@
 # Bot-Launcher
-A simple discord-bot developing and running tool for beginners.
+누구나 쉽고 빠르게 디스코드 봇을 제작하고 관리할 수 있는 도구.
+
+## Support
+풀 리퀘스트나 이슈를 통해 더 좋은 방식을 추천해주세요!
+~~본인은 웹 개발 초보라서 정석을 모릅니다~~
