@@ -27,6 +27,9 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+    if (message.system) return;
+    if (message.author.bot) return;
+
     if (message.content.startsWith(document.getElementById('prefixInput').value)) {
         console.log(message.author.tag, ': ', message.content);
     }
