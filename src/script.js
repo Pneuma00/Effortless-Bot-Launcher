@@ -59,8 +59,12 @@ document.getElementById('replyAddButton').addEventListener('click', () => {
 <input class="replyQuery" type="text"><br>
 <input class="replyContent" type="text">`
 
-    client.replyData.add(replyContainer);
+    client.replyList.add(replyContainer);
 
     document.getElementById('replyListContainer').appendChild(replyContainer);
     document.getElementById('replyListContainer').appendChild(document.createElement('hr'));
+});
+
+document.getElementById('banIdSubmitButton').addEventListener('click', () => {
+    client.blacklist.push(document.getElementById('banIdInput').value);
 });
