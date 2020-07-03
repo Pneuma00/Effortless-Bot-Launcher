@@ -15,21 +15,33 @@
             <div class="tab_menu_container">
                 <button class="tab_menu_btn on" type="button">General</button>
                 <button class="tab_menu_btn" type="button">Reply</button>
+                <button class="tab_menu_btn" type="button">Commands</button>
                 <button class="tab_menu_btn" type="button">Blacklist</button>
+                <button class="tab_menu_btn" type="button">Log</button>
             </div>
             <div class="tab_box_container">
                 <div class="tab_box on">
                     <input id="tokenInput" type="password" placeholder="Enter the token...">
                     <button id="loginButton">Login</button><br>
                     <input id="prefixInput" type="text" placeholder="Prefix">
+                    <label>Invite Link: </label>
+                    <input id="inviteLinkOutput" type="text">
+                    <button id="inviteLinkCopyButton">Copy</button>
                 </div>
                 <div class="tab_box">
                     <div id="replyListContainer"></div>
                     <button id="replyAddButton">➕</button>
                 </div>
                 <div class="tab_box">
+                    Commands (WIP)
+                </div>
+                <div class="tab_box">
                     <input id="banIdInput" type="text">
                     <button id="banIdSubmitButton">Confirm</button>
+                </div>
+                <div class="tab_box">
+                    Logs (WIP)<br>
+                    <textarea id="logTextarea"></textarea>
                 </div>
             </div>
         </div>

@@ -26,25 +26,33 @@ client.blacklist = [];
 
 client.on('ready', () => {
     console.log(`Ready! Logged in as ${client.user.tag}!`);
+    document.getElementById('inviteLinkOutput').value = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`;
 });
 
 client.on('message', message => {
     if (message.system) return;
     if (message.author.bot) return;
 
-    if (!message.content.startsWith(document.getElementById('prefixInput').value)) return;
-
-    if (client.blacklist.includes(message.author.id)) message.reply(`You're banned from using this bot!`);
-
-    console.log(message.author.tag, ': ', message.content);
-
-    const replySearchRes = client.replyData.search(message.content)
+    // Reply check
+    const replySearchRes = client.replyList.search(message.content)
     if (replySearchRes.length) {
-        console.log('Matched!');
+        document.getElementById('logTextarea').value += message.author.tag + ': ' + message.content + '\n';
         message.channel.send(replySearchRes[0]);
     }
+    
+    // Prefix check
+    if (!message.content.startsWith(document.getElementById('prefixInput').value)) return;
+
+    // Logging
+    document.getElementById('logTextarea').value += message.author.tag + ': ' + message.content + '\n';
+
+    // Blacklist check
+    if (client.blacklist.includes(message.author.id)) message.reply(`You're banned from using this bot!`);
+
+    // TODO: Command check
 });
 
+// General
 document.getElementById('tokenInput').value = localStorage.text || '';
 
 document.getElementById('loginButton').addEventListener('click', () => {
@@ -53,6 +61,13 @@ document.getElementById('loginButton').addEventListener('click', () => {
     client.login(localStorage.text);
 });
 
+document.getElementById('inviteLinkCopyButton').addEventListener('click', () => {
+    const copyText = document.getElementById('inviteLinkOutput');
+    copyText.select();
+    document.execCommand('Copy');
+});
+
+// Reply
 document.getElementById('replyAddButton').addEventListener('click', () => {
     const replyContainer = document.createElement('div');
     replyContainer.innerHTML = `
@@ -65,6 +80,7 @@ document.getElementById('replyAddButton').addEventListener('click', () => {
     document.getElementById('replyListContainer').appendChild(document.createElement('hr'));
 });
 
+// Blacklist
 document.getElementById('banIdSubmitButton').addEventListener('click', () => {
     client.blacklist.push(document.getElementById('banIdInput').value);
 });
