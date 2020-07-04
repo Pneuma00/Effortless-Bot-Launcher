@@ -56,6 +56,8 @@ client.on('message', message => {
 document.getElementById('tokenInput').value = localStorage.text || '';
 
 document.getElementById('loginButton').addEventListener('click', () => {
+    if (!document.getElementById('prefixInput').value) return console.log('Prefix must be set!');
+
     localStorage.text = document.getElementById('tokenInput').value;
 
     client.login(localStorage.text);
@@ -82,5 +84,37 @@ document.getElementById('replyAddButton').addEventListener('click', () => {
 
 // Blacklist
 document.getElementById('banIdSubmitButton').addEventListener('click', () => {
-    client.blacklist.push(document.getElementById('banIdInput').value);
+    const banId = document.getElementById('banIdInput').value;
+    client.blacklist.push(banId);
+
+    const banUserContainer = document.createElement('div');
+    banUserContainer.innerHTML = `
+<strong>${client.users.cache.get(banId) ? client.users.cache.get(banId).tag : banId}<strong><br>`;
+
+    document.getElementById('blacklistContainer').appendChild(banUserContainer);
+});
+
+document.getElementById('logDownloadButton').addEventListener('click', () => {
+    const textFileAsBlob = new Blob(
+        [ document.getElementById('logTextarea').value ],
+        { type: 'text/plain' }
+    );
+    const fileNameToSaveAs = 'ecc.plist';
+    
+    const downloadLink = document.createElement('a');
+    downloadLink.download = 'log.txt';
+    downloadLink.innerHTML = 'Download File';
+
+    if (window.webkitURL != null) {
+        // Chrome allows the link to be clicked without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    } else {
+        // Firefox requires the link to be added to the DOM before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = evt => document.body.removeChild(evt.target);
+        downloadLink.style.display = 'none';
+        document.body.appendChild(downloadLink);
+    }
+
+    downloadLink.click();
 });
